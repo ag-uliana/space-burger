@@ -1,0 +1,28 @@
+.ingredients {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.tab {
+    padding: 0;
+}
+
+.scrollable {
+    overflow-y: auto;
+    max-height: 430px;
+    scroll-behavior: smooth;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

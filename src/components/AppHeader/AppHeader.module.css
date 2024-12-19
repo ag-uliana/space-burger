@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #282c34;
+}
+  
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navItem span {
+  margin-left: 8px;
+}
+
+.navItem.active span {
+  color: #f2f2f3;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.navItem .text_color_inactive {
+  color: #8585ad;
+}
+  
