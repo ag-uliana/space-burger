@@ -66,17 +66,20 @@ export default function BurgerConstructor({
         {renderBun("bottom", "низ")}
       </div>
 
-      <div className={styles.total}>
+      <div className={`${styles.total} mt-10`}>
         <span className="text text_type_digits-medium pr-2">{totalPrice}</span>
         <CurrencyIcon type="primary" />
-        <Button 
-          type="primary" 
-          size="medium" 
-          htmlType="button"
-          onClick={onOrderClick}
-        >
-          Оформить заказ
-        </Button>
+        <div className="ml-10">
+          <Button 
+            type="primary" 
+            size="medium" 
+            htmlType="button"
+            
+            onClick={onOrderClick}
+          >
+            Оформить заказ
+          </Button>
+          </div>
       </div>
     </section>
   );

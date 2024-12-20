@@ -10,7 +10,7 @@ export function IngredientDetails({ ingredient }: IngredientDetailsProps) {
     <div className={styles.details}>
       <img src={ingredient.image_large} alt={ingredient.name} className={styles.image} />
       <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
-      <ul className={styles.nutrition}>
+      <ul className={`${styles.nutrition} mt-8 mb-0`}>
         <li>
           <p className="text text_type_main-default text_color_inactive">Калории,ккал</p>
           <p className="text text_type_digits-default text_color_inactive">{ingredient.calories}</p>

@@ -27,12 +27,12 @@ export function Modal({ title, onClose, children }: ModalProps) {
 
   return ReactDOM.createPortal(
     <>
-      <div className={`${styles.modal} pt-30 pr-15 pb-30 pl-15`}>
+      <div className={`${styles.modal} pt-15 pr-15 pb-15 pl-15`}>
         <div className={styles.header}>
-          <div className={`${styles.closeIcon} pt-15 pr-10`}>
+          {title && <h2 className="text text_type_main-large">{title}</h2>}
+          <div className={`${styles.closeIcon}`}>
             <CloseIcon type="primary" onClick={onClose} />
           </div>
-          {title && <h2 className="text text_type_main-large">{title}</h2>}
         </div>
         <div className={styles.content}>{children}</div>
       </div>

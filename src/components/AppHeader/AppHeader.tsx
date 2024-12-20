@@ -9,8 +9,8 @@ import {
 export default function AppHeader() {
   return (
     <header className={styles.header}>
-      <nav className={`${styles.nav} pl-4 pr-4`}>
-        <ul className={`${styles.navList} m-0 p-0`}>
+      <nav className={`${styles.nav} pt-4 pb-4`}>
+        <ul className={`${styles.navList}`}>
           <li className={`${styles.navItem} mr-4 p-5`}>
             <BurgerIcon type="primary" />
             <span className="text text_type_main-default ml-2">Конструктор</span>

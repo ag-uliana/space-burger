@@ -50,20 +50,20 @@ export default function App() {
       <AppHeader />
 
       <main className={styles.main}>
-        <h2 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h2>
         <div className={styles.columns}>
           {error ? (
             <p className="text text_type_main-medium mt-10">{error}</p>
           ) : (
             <>
               <div className={styles.ingredientsColumn}>
+                <h2 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h2>
                 <BurgerIngredients
                   ingredients={ingredients}
                   onAddIngredient={handleAddIngredient}
                   onIngredientClick={handleIngredientRightClick}
                 />
               </div>
-              <div className={styles.constructorColumn}>
+              <div className={`${styles.constructorColumn} mt-25 ml-10`}>
                 <BurgerConstructor
                   bun={bun}
                   fillings={fillings}
@@ -83,7 +83,7 @@ export default function App() {
       )}
 
       {isOrderModalOpen && (
-        <Modal title="" onClose={handleCloseModal}>
+        <Modal title=" " onClose={handleCloseModal}>
           <OrderDetails />
         </Modal>
       )}
