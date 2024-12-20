@@ -1,5 +1,5 @@
-import styles from "./Modal.module.css";
 import { Ingredient } from "../../types";
+import styles from "./Modal.module.css";
 
 interface IngredientDetailsProps {
   ingredient: Ingredient;

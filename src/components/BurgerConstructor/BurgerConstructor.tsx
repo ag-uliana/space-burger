@@ -1,4 +1,3 @@
-import styles from "./BurgerConstructor.module.css";
 import {
   ConstructorElement,
   DragIcon,
@@ -6,6 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../../types";
+import styles from "./BurgerConstructor.module.css";
 
 interface BurgerConstructorProps {
   bun: Ingredient | null;
