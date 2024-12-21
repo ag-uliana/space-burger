@@ -3,8 +3,9 @@
 }
 
 .scrollable {
-  max-height: 470px;
+  max-height: 295px;
   overflow-y: auto;
+  margin-right: -32px;
 }
 
 .item {
