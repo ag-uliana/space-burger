@@ -9,12 +9,10 @@ interface BurgerIngredientsProps {
   ingredients: Ingredient[];
   onAddIngredient: (ingredient: Ingredient) => void;
   onIngredientClick: (ingredient: Ingredient) => void;
-  onContextMenu?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export function BurgerIngredients({ 
-  ingredients, 
-  onAddIngredient, 
+  ingredients,
   onIngredientClick 
 }: BurgerIngredientsProps) {
   const { currentTab, handleTabClick, refs } = useTabs();
@@ -27,7 +25,6 @@ export function BurgerIngredients({
     items: Ingredient[], 
     title: string, 
     ref: React.RefObject<HTMLHeadingElement>,
-    onIngredientRightClick: (ingredient: Ingredient) => void
   ) => (
     <>
       <h3 ref={ref} className="text text_type_main-medium mt-10 mb-6">{title}</h3>
@@ -35,15 +32,9 @@ export function BurgerIngredients({
         {items.map((item) => (
           <IngredientCard
             key={item._id}
-            image={item.image}
-            price={item.price}
-            name={item.name}
+            ingredient={item}
             count={0}
-            onClick={() => onAddIngredient(item)}
-            onContextMenu={(event: React.MouseEvent<HTMLDivElement>) => {
-              event.preventDefault();
-              onIngredientRightClick(item);
-            }}
+            onClick={() => onIngredientClick(item)}
           />
         ))}
       </div>
@@ -65,9 +56,9 @@ export function BurgerIngredients({
       </div>
 
       <div className={styles.scrollable}>
-        {renderIngredientList(buns, "Булки", refs.buns, onIngredientClick)}
-        {renderIngredientList(sauces, "Соусы", refs.sauces, onIngredientClick)}
-        {renderIngredientList(fillings, "Начинки", refs.fillings , onIngredientClick)}
+        {renderIngredientList(buns, "Булки", refs.buns)}
+        {renderIngredientList(sauces, "Соусы", refs.sauces)}
+        {renderIngredientList(fillings, "Начинки", refs.fillings)}
       </div>
     </section>
   );

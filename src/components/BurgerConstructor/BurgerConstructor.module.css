@@ -3,8 +3,9 @@
 }
 
 .scrollable {
-  max-height: 430px;
+  max-height: 295px;
   overflow-y: auto;
+  margin-right: -32px;
 }
 
 .item {
@@ -15,4 +16,10 @@
 .iconPlaceholder {
   width: 24px;
   height: 24px;
+}
+
+.total {
+  justify-content: end;
+    display: flex;
+    align-items: center;
 }
