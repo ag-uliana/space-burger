@@ -1,8 +1,10 @@
 import styles from "./Modal.module.css";
 
-export function OrderDetails() {
-  const orderId = "034536";
+interface OrderDetailsProps {
+  orderId: string;
+}
 
+export function OrderDetails({ orderId }: OrderDetailsProps) {
   return (
     <div className={styles.details}>
       <p className="orderId text text_type_digits-large">{orderId}</p>

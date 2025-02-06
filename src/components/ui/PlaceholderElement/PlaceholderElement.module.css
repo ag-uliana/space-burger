@@ -1,0 +1,21 @@
+.placeholderItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 528px;
+  background: var(--background-element);
+}
+
+.top {
+  border-radius: var(--top-constructor-item-border-radius);
+}
+
+.bottom {
+  border-radius: var(--bottom-constructor-item-border-radius);
+}
+
+.filling {
+  border-radius: var(--common-border-radius-s);
+  margin-left: 28px;
+}

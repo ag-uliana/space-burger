@@ -1,67 +1,84 @@
-import {
-  ConstructorElement,
-  DragIcon,
-  CurrencyIcon,
+import { 
+  ConstructorElement, 
+  CurrencyIcon, 
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { fakeIngredients } from "./fakeIngredientsArray";
+import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { createOrder, addIngredient } from "../../services/reducers";
+import { PlaceholderElement, DraggableFilling } from "../ui";
+import { RootState } from "../../services/store";
+import { useAppDispatch, useTotalPrice } from "../../hooks";
 import { Ingredient } from "../../types";
 import styles from "./BurgerConstructor.module.css";
 
-interface BurgerConstructorProps {
-  bun: Ingredient | null;
-  fillings: Ingredient[];
-  onRemoveFilling: (id: string) => void;
-  onOrderClick: () => void;
-}
 
-export default function BurgerConstructor({ 
-  onOrderClick
-}: BurgerConstructorProps) {
-  const bun = fakeIngredients.find((item) => item.type === "bun") || null;
-  const fillings = fakeIngredients.filter((item) => item.type !== "bun");
-  const calculateTotalPrice = () => {
-    const bunPrice = bun ? bun.price : 0;
-    const fillingsPrice = fillings.reduce((acc, item) => acc + item.price, 0);
-    return bunPrice + fillingsPrice;
+export default function BurgerConstructor() {
+  const dispatch = useAppDispatch();
+  const totalPrice = useTotalPrice();
+  const { bun, fillings } = useSelector((state: RootState) => state.burgerConstructor);
+
+  const handleOrderClick = () => {
+    if (!bun || fillings.length === 0) return;
+
+    const ingredientIds = [
+      bun._id,
+      ...fillings.map((item) => item._id),
+      bun._id,
+    ];
+
+    dispatch(createOrder(ingredientIds));
   };
 
-  const totalPrice = calculateTotalPrice();
-
-  const renderBun = (type: "top" | "bottom", textSuffix: string) => {
-    if (!bun) return null;
-    return (
-      <div className={`${styles.item} mb-4`}>
-        <span className={styles.iconPlaceholder} />
-        <ConstructorElement
-          type={type}
-          isLocked={true}
-          text={`${bun.name} (${textSuffix})`}
-          price={bun.price}
-          thumbnail={bun.image}
-        />
-      </div>
-    );
-  };
+  const [{ isOver }, dropRef] = useDrop({
+    accept: "ingredient",
+    drop: (item: Ingredient) => {
+      dispatch(addIngredient(item));
+    },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  });
 
   return (
-    <section className={styles.builder}>
-        {renderBun("top", "верх")}
-        <div className={styles.scrollable}>
-          <div className={styles.fillings}>
-            {fillings.map((item) => (
-              <div className={`${styles.item} mb-4`} key={item._id}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        {renderBun("bottom", "низ")}
+    <section ref={dropRef} className={`${styles.builder} ${isOver ? styles.dropHovered : ""}`}>
+      <div className={`${styles.item} mb-4`}>
+        {bun ? (
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />
+        ) : (
+          <PlaceholderElement text="Выберите булку" type="top" />
+        )}
+      </div>
+
+      <div className={styles.scrollable}>
+        {fillings.length > 0 ? (
+          fillings.map((item, index) => (
+            <DraggableFilling key={item.uniqueId} item={item} index={index} />
+          ))
+        ) : (
+          <PlaceholderElement text="Выберите начинку" type="filling" />
+        )}
+      </div>
+
+      <div className={`${styles.item} mt-4`}>
+        {bun ? (
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />
+        ) : (
+          <PlaceholderElement text="Выберите булку" type="bottom" />
+        )}
+      </div>
 
       <div className={`${styles.total} mt-10`}>
         <span className="text text_type_digits-medium pr-2">{totalPrice}</span>
@@ -70,15 +87,14 @@ export default function BurgerConstructor({
           <Button 
             type="primary" 
             size="medium" 
-            htmlType="button"
-            
-            onClick={onOrderClick}
+            htmlType="button" 
+            onClick={handleOrderClick}
+            disabled={!bun || fillings.length === 0}
           >
             Оформить заказ
           </Button>
-          </div>
+        </div>
       </div>
     </section>
   );
 }
-

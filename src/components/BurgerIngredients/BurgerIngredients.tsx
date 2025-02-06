@@ -1,30 +1,34 @@
-import { IngredientCard } from "./IngredientCard";
+import { useSelector, useDispatch } from "react-redux";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { 
+  selectIngredients, 
+  setCurrentIngredient, 
+  addIngredient 
+} from "../../services/reducers";
+import { IngredientCard, IngredientCounter } from "../ui";
 import { useTabs } from "../../hooks";
 import { filterIngredients } from "../../utils";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../../types";
 import styles from "./BurgerIngredients.module.css";
 
-interface BurgerIngredientsProps {
-  ingredients: Ingredient[];
-  onAddIngredient: (ingredient: Ingredient) => void;
-  onIngredientClick: (ingredient: Ingredient) => void;
-}
-
-export function BurgerIngredients({ 
-  ingredients,
-  onIngredientClick 
-}: BurgerIngredientsProps) {
-  const { currentTab, handleTabClick, refs } = useTabs();
+export function BurgerIngredients() {
+  const dispatch = useDispatch();
+  const ingredients = useSelector(selectIngredients); 
+  const { currentTab, handleTabClick, refs, scrollContainerRef } = useTabs();
 
   const buns = filterIngredients(ingredients, "bun");
   const sauces = filterIngredients(ingredients, "sauce");
   const fillings = filterIngredients(ingredients, "main");
 
+  const handleIngredientClick = (ingredient: Ingredient) => {
+    dispatch(setCurrentIngredient(ingredient));
+    dispatch(addIngredient(ingredient));
+  };
+
   const renderIngredientList = (
-    items: Ingredient[], 
-    title: string, 
-    ref: React.RefObject<HTMLHeadingElement>,
+    items: Ingredient[],
+    title: string,
+    ref: React.RefObject<HTMLHeadingElement>
   ) => (
     <>
       <h3 ref={ref} className="text text_type_main-medium mt-10 mb-6">{title}</h3>
@@ -33,8 +37,8 @@ export function BurgerIngredients({
           <IngredientCard
             key={item._id}
             ingredient={item}
-            count={0}
-            onClick={() => onIngredientClick(item)}
+            count={<IngredientCounter ingredientId={item._id} />}
+            onClick={() => handleIngredientClick(item)}
           />
         ))}
       </div>
@@ -55,7 +59,7 @@ export function BurgerIngredients({
         </Tab>
       </div>
 
-      <div className={styles.scrollable}>
+      <div className={styles.scrollable} ref={scrollContainerRef}>
         {renderIngredientList(buns, "Булки", refs.buns)}
         {renderIngredientList(sauces, "Соусы", refs.sauces)}
         {renderIngredientList(fillings, "Начинки", refs.fillings)}
