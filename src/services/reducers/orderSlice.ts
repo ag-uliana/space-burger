@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { ORDER_API_UPL } from '../../constants';
+import { request } from '../../utils';
+import { resetConstructor } from './constructorSlice';
 
 type OrderState = {
-  orderId: string | null;
+  orderId: number | null;
   error: string | null;
   status: 'idle' | 'loading' | 'failed';
 };
@@ -15,22 +16,19 @@ const initialState: OrderState = {
 
 export const createOrder = createAsyncThunk(
   "order/createOrder",
-  async (ingredientIds: string[], { rejectWithValue }) => {
+  async (ingredientIds: string[], { dispatch, rejectWithValue }) => {
     try {
-      const response = await fetch(ORDER_API_UPL, {
+      const data = await request<{ success: boolean; order: { number: number } }>("/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ingredients: ingredientIds }),
-      });
+      })
 
-      const data = await response.json();
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Ошибка оформления заказа");
-      }
+      dispatch(resetConstructor());
 
       return data.order.number;
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || "Ошибка оформления заказа");
     }
   }
 );
@@ -51,7 +49,7 @@ const orderSlice = createSlice({
         state.status = "loading";
         state.error = null;
       })
-      .addCase(createOrder.fulfilled, (state, action: PayloadAction<string>) => {
+      .addCase(createOrder.fulfilled, (state, action: PayloadAction<number>) => {
         state.status = "idle";
         state.orderId = action.payload;
       })

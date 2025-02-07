@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { API_URL } from '../../constants';
+import { request } from '../../utils';
 import { Ingredient } from '../../types';
 
 type IngredientsState = {
@@ -12,15 +12,10 @@ const initialState: IngredientsState = {
   status: 'idle',
 };
 
-export const fetchIngredients = createAsyncThunk('ingredients/fetchIngredients', async () => {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-  
-    if (!response.ok || !data.success) {
-      throw new Error('Ошибка загрузки ингредиентов');
-    }
-
-    return data.data;
+export const fetchIngredients = createAsyncThunk(
+  'ingredients/fetchIngredients', 
+  async () => {
+    return request<{ data: Ingredient[] }>("/ingredients").then((data) => data.data);
 });
 
 const ingredientsSlice = createSlice({
