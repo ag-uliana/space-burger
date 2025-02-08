@@ -1,13 +1,11 @@
-import {
-    Counter,
-    CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Ingredient } from "../../types";
+import { useDrag } from "react-dnd";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Ingredient } from "../../../types";
 import styles from "./IngredientCard.module.css";
 
 interface IngredientCardProps {
     ingredient: Ingredient;
-    count: number;
+    count?: React.ReactNode;
     onClick: () => void;
   }
 
@@ -17,10 +15,22 @@ export function IngredientCard({
   onClick
 }: IngredientCardProps) {
   const { image, price, name } = ingredient;
+
+  const [{ isDragging }, dragRef] = useDrag({
+    type: "ingredient",
+    item: ingredient,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
   
     return (
-      <div className={`${styles.card}`} onClick={onClick}>
-        {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+      <div 
+        ref={dragRef}
+        className={`${styles.card} ${isDragging ? styles.dragging : ""}`} 
+        onClick={onClick}
+      >
+        {count}
         <img src={image} alt={name} className={styles.image} />
         <div className={styles.price}>
           <span className="text text_type_digits-default mr-2">{price}</span>

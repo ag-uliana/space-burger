@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { 
   AppHeader, 
   BurgerIngredients,
@@ -7,85 +8,68 @@ import {
   IngredientDetails,
   Modal
 } from "./components";
-import { useFetchIngredients } from "./hooks";
-import { API_URL } from "./constants";
-import { Ingredient } from "./types";
+import {
+  fetchIngredients,
+  selectIngredientsStatus,
+  resetOrder,
+  clearCurrentIngredient
+} from './services/reducers';
+import { useAppDispatch } from "./hooks";
+import { RootState } from './services/store';
 import styles from './App.module.css';
 
 export default function App() {
-  const { ingredients, error } = useFetchIngredients(API_URL);
-  const [bun, setBun] = useState<Ingredient | null>(null);
-  const [fillings, setFillings] = useState<Ingredient[]>([]);
-  const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
-  
+  const dispatch = useAppDispatch();
+  const ingredientsStatus = useSelector(selectIngredientsStatus);
+  const selectedIngredient = useSelector((state: RootState) => state.currentIngredient.ingredient);
+  const orderId = useSelector((state: RootState) => state.order.orderId);
+  const orderStatus = useSelector((state: RootState) => state.order.status);
 
-  const handleAddIngredient = (ingredient: Ingredient) => {
-    if (ingredient.type === "bun") {
-      setBun(ingredient);
-    } else {
-      setFillings((prev) => [...prev, ingredient]);
-    }
-  };
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch]);
 
-  const handleRemoveFilling = (id: string) => {
-    setFillings((prev) => prev.filter((item) => item._id !== id));
-  };
+  const handleCloseIngredientModal = () => {
+    dispatch(clearCurrentIngredient());
+  }
 
-  const handleIngredientRightClick = (ingredient: Ingredient) => {
-    setSelectedIngredient(ingredient);
-  };
-
-  const handleOrderClick = () => {
-    setIsOrderModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedIngredient(null);
-    setIsOrderModalOpen(false);
+  const handleCloseOrderModal = () => {
+    dispatch(resetOrder());
   };
 
   return (
     <div className={styles.app}>
       <AppHeader />
-
       <main className={styles.main}>
+        <h1 className="columnsHeader text text_type_main-large pt-10 pb-5 pl-30">Соберите бургер</h1>
         <div className={styles.columns}>
-          {error ? (
-            <p className="text text_type_main-medium mt-10">{error}</p>
-          ) : (
+          {ingredientsStatus === 'loading' && <p>Загрузка...</p>}
+          {ingredientsStatus === 'failed' && <p>Ошибка загрузки</p>}
+          {ingredientsStatus === 'idle' && (
             <>
-              <div className={styles.ingredientsColumn}>
-                <h2 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h2>
-                <BurgerIngredients
-                  ingredients={ingredients}
-                  onAddIngredient={handleAddIngredient}
-                  onIngredientClick={handleIngredientRightClick}
-                />
-              </div>
-              <div className={`${styles.constructorColumn} mt-25 ml-10`}>
-                <BurgerConstructor
-                  bun={bun}
-                  fillings={fillings}
-                  onRemoveFilling={handleRemoveFilling}
-                  onOrderClick={handleOrderClick}
-                />
-              </div>
+              <BurgerIngredients />
+              <BurgerConstructor />
             </>
           )}
         </div>
       </main>
 
       {selectedIngredient && (
-        <Modal title="Детали ингредиента" onClose={handleCloseModal}>
+        <Modal onClose={handleCloseIngredientModal}>
           <IngredientDetails ingredient={selectedIngredient} />
         </Modal>
       )}
 
-      {isOrderModalOpen && (
-        <Modal title=" " onClose={handleCloseModal}>
-          <OrderDetails />
+      {orderId && (
+        <Modal onClose={handleCloseOrderModal}>
+          <OrderDetails orderId={orderId} />
         </Modal>
+      )}
+
+      {orderStatus === "failed" && (
+        <p className="text text_type_main-default text_color_error mt-4">
+          Ошибка оформления заказа. Попробуйте снова.
+        </p>
       )}
     </div>
   );

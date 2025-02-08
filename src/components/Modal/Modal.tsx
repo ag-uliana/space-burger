@@ -4,7 +4,6 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "./ModalOverlay";
 import styles from "./Modal.module.css";
 
-
 interface ModalProps {
   title?: string;
   onClose: () => void;

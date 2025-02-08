@@ -1,27 +1,28 @@
 .ingredients {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  box-sizing: content-box;
+  padding-right: 3%;
 }
 
 .tabs {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .tab {
-    padding: 0;
+  padding: 0;
 }
 
 .scrollable {
-    overflow-y: auto;
-    height: 66vh;
-    scroll-behavior: smooth;
+  overflow-y: auto;
+  height: 66vh;
+  scroll-behavior: smooth;
 }
 
 .items {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
