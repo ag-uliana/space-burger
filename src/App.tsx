@@ -1,77 +1,89 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { 
-  AppHeader, 
-  BurgerIngredients,
-  BurgerConstructor,
-  OrderDetails,
-  IngredientDetails,
-  Modal
-} from "./components";
-import {
-  fetchIngredients,
-  selectIngredientsStatus,
-  resetOrder,
-  clearCurrentIngredient
-} from './services/reducers';
-import { useAppDispatch } from "./hooks";
-import { RootState } from './services/store';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { AppHeader } from "./components";
+import BurgerPage from "./pages/BurgerPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ProfilePage from "./pages/ProfilePage";
+import IngredientPage from "./pages/IngredientPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import ProtectedRouteElement from "./components/ProtectedRoute/ProtectedRouteElement";
+import { clearCurrentIngredient } from "./services/reducers";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./services/store";
+import { logout } from "./services/reducers/authSlice";
+import { IngredientDetails } from "./components";
+import { Modal } from "./components";
 import styles from './App.module.css';
 
 export default function App() {
-  const dispatch = useAppDispatch();
-  const ingredientsStatus = useSelector(selectIngredientsStatus);
-  const selectedIngredient = useSelector((state: RootState) => state.currentIngredient.ingredient);
-  const orderId = useSelector((state: RootState) => state.order.orderId);
-  const orderStatus = useSelector((state: RootState) => state.order.status);
+  const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const background = location.state?.background;
 
   useEffect(() => {
-    dispatch(fetchIngredients());
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) {
+      dispatch(logout());
+    }
   }, [dispatch]);
 
-  const handleCloseIngredientModal = () => {
-    dispatch(clearCurrentIngredient());
-  }
-
-  const handleCloseOrderModal = () => {
-    dispatch(resetOrder());
-  };
-
   return (
-    <div className={styles.app}>
-      <AppHeader />
-      <main className={styles.main}>
-        <h1 className="columnsHeader text text_type_main-large pt-10 pb-5 pl-30">Соберите бургер</h1>
-        <div className={styles.columns}>
-          {ingredientsStatus === 'loading' && <p>Загрузка...</p>}
-          {ingredientsStatus === 'failed' && <p>Ошибка загрузки</p>}
-          {ingredientsStatus === 'idle' && (
-            <>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </>
+      <div className={styles.app}>
+        <AppHeader />
+        <main className={styles.main}>
+          <Routes location={background || location}>
+            <Route path="/" element={<BurgerPage />} />
+            <Route 
+              path="/login" 
+              element={
+                <ProtectedRouteElement onlyUnAuth>
+                  <LoginPage />
+                </ProtectedRouteElement>} 
+            />
+            <Route 
+              path="/register" 
+              element={<
+                ProtectedRouteElement onlyUnAuth>
+                  <RegisterPage />
+                </ProtectedRouteElement>} 
+            />
+            <Route 
+              path="/forgot-password" 
+              element={
+              <ProtectedRouteElement onlyUnAuth>
+                <ForgotPasswordPage />
+              </ProtectedRouteElement>} 
+            />
+            <Route 
+              path="/reset-password" 
+              element={<ProtectedRouteElement onlyUnAuth requiresForgotPassword>
+                <ResetPasswordPage />
+              </ProtectedRouteElement>} 
+            />
+            <Route 
+              path="/profile/*" 
+              element={<ProtectedRouteElement>
+                <ProfilePage />
+                </ProtectedRouteElement>
+            } />
+            <Route path="/ingredients/:id" element={<IngredientPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+
+          {background && (
+            <Modal onClose={() => {
+              navigate(-1);
+              dispatch(clearCurrentIngredient());
+            }}> 
+              <IngredientDetails />
+            </Modal>
           )}
-        </div>
-      </main>
-
-      {selectedIngredient && (
-        <Modal onClose={handleCloseIngredientModal}>
-          <IngredientDetails ingredient={selectedIngredient} />
-        </Modal>
-      )}
-
-      {orderId && (
-        <Modal onClose={handleCloseOrderModal}>
-          <OrderDetails orderId={orderId} />
-        </Modal>
-      )}
-
-      {orderStatus === "failed" && (
-        <p className="text text_type_main-default text_color_error mt-4">
-          Ошибка оформления заказа. Попробуйте снова.
-        </p>
-      )}
-    </div>
+        </main>
+      </div>
   );
 }
 
