@@ -4,7 +4,7 @@ import { Ingredient } from '../../types';
 
 type IngredientsState = {
   items: Ingredient[];
-  status: 'idle' | 'loading' | 'failed';
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
 };
 
 const initialState: IngredientsState = {
@@ -15,7 +15,7 @@ const initialState: IngredientsState = {
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients', 
   async () => {
-    return request<{ data: Ingredient[] }>("/ingredients").then((data) => data.data);
+    return request("/ingredients").then((response) => response.data);
 });
 
 const ingredientsSlice = createSlice({
@@ -28,7 +28,7 @@ const ingredientsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = 'succeeded';
         state.items = action.payload;
       })
       .addCase(fetchIngredients.rejected, (state) => {

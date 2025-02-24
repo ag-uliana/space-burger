@@ -7,6 +7,10 @@ type OrderState = {
   error: string | null;
   status: 'idle' | 'loading' | 'failed';
 };
+interface OrderResponse {
+  success: boolean;
+  order: { number: number };
+}
 
 const initialState: OrderState = {
   orderId: null,
@@ -18,17 +22,20 @@ export const createOrder = createAsyncThunk(
   "order/createOrder",
   async (ingredientIds: string[], { dispatch, rejectWithValue }) => {
     try {
-      const data = await request<{ success: boolean; order: { number: number } }>("/orders", {
+      const data: OrderResponse = await request("/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ingredients: ingredientIds }),
-      })
+      });
 
       dispatch(resetConstructor());
 
       return data.order.number;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Ошибка оформления заказа");
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("Ошибка оформления заказа");
     }
   }
 );

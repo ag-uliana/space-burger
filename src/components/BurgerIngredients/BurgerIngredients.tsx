@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { 
   selectIngredients, 
@@ -13,6 +14,7 @@ import styles from "./BurgerIngredients.module.css";
 
 export function BurgerIngredients() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ingredients = useSelector(selectIngredients); 
   const { currentTab, handleTabClick, refs, scrollContainerRef } = useTabs();
 
@@ -23,6 +25,9 @@ export function BurgerIngredients() {
   const handleIngredientClick = (ingredient: Ingredient) => {
     dispatch(setCurrentIngredient(ingredient));
     dispatch(addIngredient(ingredient));
+    navigate(`/ingredients/${ingredient._id}`, {
+      state: { background: { pathname: location.pathname } }
+    });
   };
 
   const renderIngredientList = (
