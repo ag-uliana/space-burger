@@ -20,7 +20,7 @@ interface ProfileInputProps {
 
 const useProfileForm = (user: RootState["auth"]["user"]) => { 
   const dispatch = useDispatch<AppDispatch>();
-  const [_, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const refreshTokenValue = useSelector((state: RootState) => state.auth.refreshToken);
@@ -67,6 +67,7 @@ const useProfileForm = (user: RootState["auth"]["user"]) => {
     });
     setIsEditing({ name: false, email: false, password: false });
     setHasChanges(false);
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,12 +93,14 @@ const useProfileForm = (user: RootState["auth"]["user"]) => {
 
     setIsEditing({ name: false, email: false, password: false });
     setHasChanges(false);
+    setError(null);
   };
 
   return {
     formData,
     isEditing,
     hasChanges,
+    error,
     handleChange,
     handleEdit,
     handleCancel,
@@ -127,6 +130,7 @@ export function ProfileInfo() {
     isEditing, 
     hasChanges, 
     handleChange, 
+    error,
     handleEdit, 
     handleCancel, 
     handleSubmit 
@@ -166,6 +170,8 @@ export function ProfileInfo() {
           onChange={handleChange}
           onIconClick={() => handleEdit("password")}
         />
+
+        {error && <p className={styles.error}>{error}</p>}
 
         {hasChanges && (
           <div className={styles.buttons}>

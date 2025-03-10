@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { request } from "../api";
 import { authAPI } from "../api/authAPI";
@@ -13,6 +13,12 @@ interface AuthState {
 
 const savedUser = localStorage.getItem("user");
 const savedRefreshToken = localStorage.getItem("refreshToken");
+
+const selectAuth = (state: RootState) => state.auth;
+export const selectUser = createSelector(
+  [selectAuth],
+  (auth) => auth.user
+);
 
 const initialState: AuthState = {
   user: savedUser ? JSON.parse(savedUser) : null,

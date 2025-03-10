@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../services/store";
+import { NutritionItem } from "./NutritionItem";
 import styles from "./Modal.module.css";
 
 const useIngredientDetails = () => {
@@ -10,13 +11,6 @@ const useIngredientDetails = () => {
 
   return id ? allIngredients.find((item) => item._id === id) : selectedIngredient;
 };
-
-const NutritionItem = ({ label, value }: { label: string; value: number }) => (
-  <li>
-    <p className="text text_type_main-default text_color_inactive">{label}</p>
-    <p className="text text_type_digits-default text_color_inactive">{value}</p>
-  </li>
-);
 
 export function IngredientDetails() {
   const ingredient = useIngredientDetails();

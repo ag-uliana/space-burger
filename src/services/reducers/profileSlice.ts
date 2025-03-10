@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { request } from "../api/request";
 import { refreshToken } from "./authSlice";
 import { RootState } from "../store";
@@ -19,6 +19,13 @@ const initialState: ProfileState = {
   isLoading: false,
   error: null,
 };
+
+const selectProfile = (state: RootState) => state.profile;
+
+export const selectIsProfileLoading = createSelector(
+  [selectProfile],
+  (profile) => profile.isLoading 
+);
 
 const getAccessToken = (state: RootState) => {
   const accessToken = state.auth.accessToken;
