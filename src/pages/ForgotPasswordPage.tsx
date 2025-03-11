@@ -25,8 +25,7 @@ export default function ForgotPasswordPage() {
     }
 
     try {
-      const response = await forgotPassword(formData.email);
-      console.log(response.message);
+      await forgotPassword(formData.email);
       
       navigate("/reset-password", { replace: true });
     } catch (err) {

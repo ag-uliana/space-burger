@@ -13,9 +13,7 @@ export default function ResetPasswordPage() {
     setError(null);
 
     try {
-      const response = await resetPassword(formData.password, formData.token);
-      console.log(response.message);
-      
+      await resetPassword(formData.password, formData.token);
       navigate("/login");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ошибка сброса пароля");

@@ -20,18 +20,18 @@
   padding-left: 0;
 }
 
-.navItem {
+.link {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  text-decoration: none;
 }
 
-.navItem span {
-  margin-left: 8px;
-}
-
-.navItem.active span {
+.active {
   color: #f2f2f3;
+}
+
+.inactive {
+  color: var(--text-inactive-color);
 }
 
 .logo {

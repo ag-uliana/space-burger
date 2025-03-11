@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { 
   ConstructorElement, 
   CurrencyIcon, 
@@ -15,11 +16,18 @@ import styles from "./BurgerConstructor.module.css";
 
 export default function BurgerConstructor() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const totalPrice = useTotalPrice();
   const { bun, fillings } = useSelector((state: RootState) => state.burgerConstructor);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleOrderClick = () => {
     if (!bun || fillings.length === 0) return;
+
+    if (!user) {
+      navigate("/login"); 
+      return;
+    }
 
     const ingredientIds = [
       bun._id,
