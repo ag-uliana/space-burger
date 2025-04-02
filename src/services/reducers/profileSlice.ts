@@ -27,7 +27,7 @@ export const selectIsProfileLoading = createSelector(
   (profile) => profile.isLoading 
 );
 
-const getAccessToken = (state: RootState) => {
+export const getAccessToken = (state: RootState) => {
   const accessToken = state.auth.accessToken;
   if (!accessToken) throw new Error("Нет accessToken. Авторизация требуется.");
   return accessToken;

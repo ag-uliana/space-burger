@@ -5,3 +5,7 @@ export * from "./useTotalPrice";
 export * from "./useProfileData";
 export * from "./useBurgerState";
 export * from "./useAuth";
+export * from "./useProfileData";
+export * from "./useProfileFeedConnection";
+export * from "./useFeedConnection";
+export * from "./useFetchIngredients";

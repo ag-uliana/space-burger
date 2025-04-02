@@ -41,7 +41,13 @@
 }
 
 .orders {
-  max-width: 600px;
+  width: 844px;
+}
+
+.orderList {
+  overflow-y: auto;
+  max-height: 80vh;
+  margin: 0;
 }
 
 .sidebar {

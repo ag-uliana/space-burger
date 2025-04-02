@@ -27,7 +27,7 @@ export default function AppHeader() {
               className={({ isActive }) => `${styles.link} ${isActive ? styles.active : styles.inactive}`}
             >
               <ListIcon type="secondary" />
-              <span className="text text_type_main-default text_color_inactive ml-2">
+              <span className="text text_type_main-default ml-2">
                 Лента заказов
               </span>
             </NavLink>
