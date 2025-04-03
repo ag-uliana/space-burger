@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "./types/hooks";
 import BurgerPage from "./pages/BurgerPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -14,12 +14,11 @@ import OrderDetailsPage from "./pages/OrderDetailsPage";
 import { AppHeader, IngredientDetails, Modal } from "./components";
 import ProtectedRouteElement from "./components/ProtectedRoute/ProtectedRouteElement";
 import { clearCurrentIngredient, logout } from "./services/reducers";
-import { AppDispatch } from "./services/store";
 import { useFeedConnection, useProfileFeedConnection } from "./hooks";
 import styles from './App.module.css';
 
 export default function App() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state?.background;

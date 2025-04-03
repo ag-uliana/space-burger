@@ -1,9 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FeedOrder } from '../../services/reducers';
 import { formatRelativeDate, getStatusText } from '../../utils';
-import { RootState } from '../../services/store';
+import { useAppSelector } from '../../types/hooks';
 import styles from './OrderCard.module.css';
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
 
 export default function OrderCard({ order, linkPrefix = '/feed', showStatus = false }: Props) {
   const location = useLocation();
-  const ingredientsData = useSelector((state: RootState) => state.ingredients.items);
+  const ingredientsData = useAppSelector(state => state.ingredients.items);
 
   const orderIngredients = order.ingredients
     .map(id => ingredientsData.find(item => item._id === id))

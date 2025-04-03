@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../services/store";
+import { useAppSelector } from "../../types/hooks";
 import { NutritionItem } from "./NutritionItem";
 import styles from "./Modal.module.css";
 
 const useIngredientDetails = () => {
   const { id } = useParams();
-  const selectedIngredient = useSelector((state: RootState) => state.currentIngredient.ingredient);
-  const allIngredients = useSelector((state: RootState) => state.ingredients.items);
+  const selectedIngredient = useAppSelector(state => state.currentIngredient.ingredient);
+  const allIngredients = useAppSelector(state => state.ingredients.items);
 
   return id ? allIngredients.find((item) => item._id === id) : selectedIngredient;
 };

@@ -1,7 +1,7 @@
 import { Modal } from "./Modal";
 import { OrderDetails } from "./OrderDetails";
 import { IngredientDetails } from "./IngredientDetails";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch } from "../../types/hooks";
 import { resetOrder, clearCurrentIngredient } from "../../services/reducers";
 import { useBurgerState } from "../../hooks/useBurgerState";
 

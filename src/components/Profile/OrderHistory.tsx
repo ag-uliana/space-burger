@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
 import OrderCard from '../OrderCard/OrderCard';
-import { RootState } from '../../services/store';
 import { useProfileFeedConnection } from '../../hooks';
+import { useAppSelector } from '../../types/hooks';
 import styles from './ProfilePage.module.css';
 
 export function OrderHistory() {
   useProfileFeedConnection(true);
-  const { orders, status } = useSelector((state: RootState) => state.profileFeed);
+  const { orders, status } = useAppSelector(state => state.profileFeed);
 
   return (
     <div className={styles.orders}>

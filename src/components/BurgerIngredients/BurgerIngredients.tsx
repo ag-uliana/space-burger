@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../types/hooks";
 import { useNavigate } from "react-router-dom";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { 
@@ -13,9 +13,9 @@ import { Ingredient } from "../../types";
 import styles from "./BurgerIngredients.module.css";
 
 export function BurgerIngredients() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const ingredients = useSelector(selectIngredients); 
+  const ingredients = useAppSelector(selectIngredients); 
   const { currentTab, handleTabClick, refs, scrollContainerRef } = useTabs();
 
   const buns = filterIngredients(ingredients, "bun");

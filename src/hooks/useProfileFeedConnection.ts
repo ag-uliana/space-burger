@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../types/hooks';
 import { profileFeedActions } from '../services/reducers';
-import { RootState } from '../services/store';
+import { useAuthToken } from './useAuthToken';
 import { WS_BASE_URL } from '../constants';
 
 export const useProfileFeedConnection = (enabled: boolean) => {
   const dispatch = useAppDispatch();
-  const status = useSelector((state: RootState) => state.profileFeed.status);
-  const token = localStorage.getItem('accessToken')?.replace('Bearer ', '');
+  const status = useAppSelector(state => state.profileFeed.status);
+  const { token, ready } = useAuthToken();
 
   useEffect(() => {
-    if (!enabled || !token) return;
+    if (!enabled || !ready || !token) return;
 
     if (status !== 'connected') {
       dispatch({

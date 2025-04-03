@@ -1,9 +1,8 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../services/store";
+import { useAppSelector } from "../types/hooks";
 
 export function useTotalPrice() {
-  const { bun, fillings } = useSelector((state: RootState) => state.burgerConstructor);
+  const { bun, fillings } = useAppSelector(state => state.burgerConstructor);
 
   return useMemo(() => {
     const bunPrice = bun ? bun.price * 2 : 0;

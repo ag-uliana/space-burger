@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
 import { selectIngredientsStatus } from "../services/reducers";
-import { RootState } from "../services/store";
+import { useAppSelector } from "../types/hooks";
 
 export const useBurgerState = () => {
-  const ingredientsStatus = useSelector(selectIngredientsStatus);
-  const selectedIngredient = useSelector((state: RootState) => state.currentIngredient.ingredient);
-  const orderId = useSelector((state: RootState) => state.order.orderId);
-  const orderStatus = useSelector((state: RootState) => state.order.status);
+  const ingredientsStatus = useAppSelector(selectIngredientsStatus);
+  const selectedIngredient = useAppSelector(state => state.currentIngredient.ingredient);
+  const orderId = useAppSelector(state => state.order.orderId);
+  const orderStatus = useAppSelector(state => state.order.status);
 
   return { ingredientsStatus, selectedIngredient, orderId, orderStatus };
 };

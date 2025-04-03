@@ -1,10 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../types/hooks";
+import { RootState } from "../services/store";
 import { login, logout, register } from "../services/reducers";
 
 export const useAuth = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { user, isLoading, error } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { user, isLoading, error } = useAppSelector((state: RootState) => state.auth);
 
   return {
     user,

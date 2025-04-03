@@ -1,18 +1,16 @@
 import { useParams, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useEffect, useMemo } from "react";
 import { fetchIngredients } from "../services/reducers";
-import { useAppDispatch } from "./hooks";
-import { RootState } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../types/hooks";
 
 export function useOrderDetails() {
   const { id } = useParams();
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  const ingredientsData = useSelector((state: RootState) => state.ingredients.items);
-  const feedOrders = useSelector((state: RootState) => state.feed.orders || []);
-  const profileOrders = useSelector((state: RootState) => state.profileFeed.orders || []);
+  const ingredientsData = useAppSelector(state => state.ingredients.items);
+  const feedOrders = useAppSelector(state => state.feed.orders || []);
+  const profileOrders = useAppSelector(state => state.profileFeed.orders || []);
 
   const isProfileOrder = location.pathname.startsWith('/profile/orders');
   const orders = isProfileOrder ? profileOrders : feedOrders;

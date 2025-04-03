@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../types/hooks';
 import { refreshToken } from '../services/reducers';
-import { RootState } from '../services/store';
 
 export function useAuthToken() {
   const dispatch = useAppDispatch();
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  const accessToken = useAppSelector(state => state.auth.accessToken);
   const [ready, setReady] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
