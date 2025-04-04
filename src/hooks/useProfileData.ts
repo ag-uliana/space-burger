@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../types/hooks";
 import { selectUser } from "../services/reducers";
 import { selectIsProfileLoading } from "../services/reducers/profileSlice";
 import { fetchUserProfile } from "../services/reducers/profileSlice";
 
 export const useProfileData = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const user = useSelector(selectUser);
-    const isLoading = useSelector(selectIsProfileLoading);
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(selectUser);
+    const isLoading = useAppSelector(selectIsProfileLoading);
     const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {

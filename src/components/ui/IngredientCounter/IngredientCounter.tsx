@@ -1,13 +1,12 @@
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../services/store";
+import { useAppSelector } from "../../../types/hooks";
 
 interface IngredientCounterProps {
   ingredientId: string;
 }
 
 export function IngredientCounter({ ingredientId }: IngredientCounterProps) {
-  const { bun, fillings } = useSelector((state: RootState) => state.burgerConstructor);
+  const { bun, fillings } = useAppSelector(state => state.burgerConstructor);
 
   if (bun?._id === ingredientId) {
     return <Counter count={2} size="default" />;

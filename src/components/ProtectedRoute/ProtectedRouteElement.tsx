@@ -1,6 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../services/store";
+import { useAppSelector } from "../../types/hooks";
 
 interface ProtectedRouteElementProps {
   children: JSX.Element;
@@ -13,7 +12,7 @@ const ProtectedRouteElement = ({
   onlyUnAuth = false,
   requiresForgotPassword = false,
 }: ProtectedRouteElementProps) => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useAppSelector(state => state.auth.user);
   const location = useLocation();
   const forgotPasswordVisited = sessionStorage.getItem("forgotPasswordVisited") === "true";
 

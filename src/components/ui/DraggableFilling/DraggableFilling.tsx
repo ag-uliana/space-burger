@@ -2,7 +2,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { moveIngredient, removeIngredient } from "../../../services/reducers";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../../types/hooks";
 import { Ingredient } from "../../../types";
 import styles from "./DraggableFilling.module.css";
 

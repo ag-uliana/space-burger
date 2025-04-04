@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { request } from '../../utils';
 import { resetConstructor } from './constructorSlice';
+import { RootState } from '../store';
 
 type OrderState = {
   orderId: number | null;
@@ -20,11 +21,21 @@ const initialState: OrderState = {
 
 export const createOrder = createAsyncThunk(
   "order/createOrder",
-  async (ingredientIds: string[], { dispatch, rejectWithValue }) => {
+  async (ingredientIds: string[], { dispatch, rejectWithValue, getState }) => {
     try {
+      const state = getState() as RootState;
+      let accessToken = state.auth.accessToken;
+
+      if (!accessToken) {
+        return rejectWithValue("Вы не авторизованы");
+      }
+
       const data: OrderResponse = await request("/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({ ingredients: ingredientIds }),
       });
 

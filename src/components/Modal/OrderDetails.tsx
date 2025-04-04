@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../services/store";
+import { useAppSelector } from "../../types/hooks";
 import styles from "./Modal.module.css";
 
 export function OrderDetails() {
-  const orderId = useSelector((state: RootState) => state.order.orderId);
-  const orderStatus = useSelector((state: RootState) => state.order.status);
+  const orderId = useAppSelector(state => state.order.orderId);
+  const orderStatus = useAppSelector(state => state.order.status);
 
   return (
     <div className={styles.details}>

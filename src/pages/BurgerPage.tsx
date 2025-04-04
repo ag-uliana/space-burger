@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { BurgerIngredients, BurgerConstructor, BurgerModals } from "../components";
 import { fetchIngredients } from "../services/reducers/ingredientsSlice";
-import { useAppDispatch, useBurgerState } from "../hooks";
+import { useBurgerState } from "../hooks";
+import { useAppDispatch } from "../types/hooks";
 import styles from "../App.module.css";
 
 export default function BurgerPage() {

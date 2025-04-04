@@ -4,12 +4,11 @@ import {
   CurrencyIcon, 
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../types/hooks";
+import { useTotalPrice } from "../../hooks";
 import { useDrop } from "react-dnd";
 import { createOrder, addIngredient } from "../../services/reducers";
 import { PlaceholderElement, DraggableFilling } from "../ui";
-import { RootState } from "../../services/store";
-import { useAppDispatch, useTotalPrice } from "../../hooks";
 import { Ingredient } from "../../types";
 import styles from "./BurgerConstructor.module.css";
 
@@ -18,8 +17,8 @@ export default function BurgerConstructor() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const totalPrice = useTotalPrice();
-  const { bun, fillings } = useSelector((state: RootState) => state.burgerConstructor);
-  const user = useSelector((state: RootState) => state.auth.user);
+  const { bun, fillings } = useAppSelector(state => state.burgerConstructor);
+  const user = useAppSelector(state => state.auth.user);
 
   const handleOrderClick = () => {
     if (!bun || fillings.length === 0) return;

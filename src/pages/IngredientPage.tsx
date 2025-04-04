@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../types/hooks";
 import { IngredientDetails } from "../components";
 import { fetchIngredients } from "../services/reducers/ingredientsSlice";
-import { RootState, AppDispatch } from "../services/store";
+import { RootState } from "../services/store";
 import { Ingredient } from "../types";
 import styles from "../components/BurgerIngredients/BurgerIngredients.module.css"
 
 export default function IngredientPage() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const ingredient = useSelector((state: RootState) =>
+  const ingredient = useAppSelector((state: RootState) =>
     state.ingredients.items.find((item: Ingredient) => item._id === id)
   );
 

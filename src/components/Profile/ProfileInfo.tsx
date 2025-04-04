@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../../services/store";
+import { RootState } from "../../services/store";
 import { updateUserProfile } from "../../services/reducers/profileSlice";
 import { updateAuthUser, refreshToken } from "../../services/reducers/authSlice";
 import { useProfileData } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../types/hooks";
 import styles from "./ProfilePage.module.css";
 
 interface ProfileInputProps {
@@ -19,11 +18,11 @@ interface ProfileInputProps {
 }
 
 const useProfileForm = (user: RootState["auth"]["user"]) => { 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [error, setError] = useState<string | null>(null);
 
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
-  const refreshTokenValue = useSelector((state: RootState) => state.auth.refreshToken);
+  const accessToken = useAppSelector((state: RootState) => state.auth.accessToken);
+  const refreshTokenValue = useAppSelector((state: RootState) => state.auth.refreshToken);
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
