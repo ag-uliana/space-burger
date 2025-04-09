@@ -3,7 +3,7 @@ import { request } from '../../utils';
 import { resetConstructor } from './constructorSlice';
 import { RootState } from '../store';
 
-type OrderState = {
+export type OrderState = {
   orderId: number | null;
   error: string | null;
   status: 'idle' | 'loading' | 'failed';

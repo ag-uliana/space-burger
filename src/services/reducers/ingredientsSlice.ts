@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { request } from '../../utils';
 import { Ingredient } from '../../types';
 
-type IngredientsState = {
+export type IngredientsState = {
   items: Ingredient[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
 };

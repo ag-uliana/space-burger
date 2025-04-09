@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 import { Ingredient } from '../../types';
 
 type ConstructorState = {

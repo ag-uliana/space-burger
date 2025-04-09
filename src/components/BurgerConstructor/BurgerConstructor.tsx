@@ -48,7 +48,7 @@ export default function BurgerConstructor() {
   });
 
   return (
-    <section ref={dropRef} className={`${styles.builder} ${isOver ? styles.dropHovered : ""}`}>
+    <section data-testid="burger-constructor" ref={dropRef} className={`${styles.builder} ${isOver ? styles.dropHovered : ""}`}>
       <div className={`${styles.item} mb-4`}>
         {bun ? (
           <ConstructorElement
