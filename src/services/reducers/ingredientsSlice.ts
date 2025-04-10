@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { request } from '../../utils';
+import { request, ApiResponse } from '../../utils';
 import { Ingredient } from '../../types';
 
 export type IngredientsState = {
@@ -12,10 +12,11 @@ const initialState: IngredientsState = {
   status: 'idle',
 };
 
-export const fetchIngredients = createAsyncThunk(
+export const fetchIngredients = createAsyncThunk<Ingredient[]>(
   'ingredients/fetchIngredients', 
   async () => {
-    return request("/ingredients").then((response) => response.data);
+    const response = await request<ApiResponse<Ingredient[]>>("/ingredients");
+    return response.data!;
 });
 
 const ingredientsSlice = createSlice({

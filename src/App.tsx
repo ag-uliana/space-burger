@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "./types/hooks";
 import BurgerPage from "./pages/BurgerPage";
