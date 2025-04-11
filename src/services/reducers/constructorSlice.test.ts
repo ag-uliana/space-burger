@@ -4,6 +4,7 @@ import constructorReducer, {
   removeIngredient,
   moveIngredient,
   resetConstructor,
+  initialState
 } from './constructorSlice';
 
 vi.mock('nanoid', () => ({
@@ -56,11 +57,6 @@ const sampleFilling2 = {
   image_mobile: 'image_mobile2',
   image_large: 'image_large2',
   __v: 1879,
-};
-
-const initialState = {
-  bun: null,
-  fillings: [],
 };
 
 describe('constructorReducer', () => {

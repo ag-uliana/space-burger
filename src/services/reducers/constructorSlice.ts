@@ -7,7 +7,7 @@ type ConstructorState = {
   fillings: Ingredient[];
 };
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   bun: null,
   fillings: [],
 };

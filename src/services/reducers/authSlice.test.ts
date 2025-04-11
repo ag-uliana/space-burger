@@ -1,5 +1,6 @@
 import authReducer, {
     updateAuthUser,
+    initialState
   } from './authSlice';
   
   import {
@@ -10,14 +11,6 @@ import authReducer, {
   } from './authSlice';
   
   import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-  
-  const initialState = {
-    user: null,
-    accessToken: null,
-    refreshToken: null,
-    isLoading: false,
-    error: null,
-  };
   
   beforeEach(() => {
     vi.stubGlobal('localStorage', {

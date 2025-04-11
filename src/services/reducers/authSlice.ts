@@ -19,7 +19,7 @@ export const selectUser = createSelector(
   (auth) => auth.user
 );
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   user: savedUser ? JSON.parse(savedUser) : null,
   accessToken: null,
   refreshToken: savedRefreshToken || null,

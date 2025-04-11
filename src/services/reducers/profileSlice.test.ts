@@ -1,15 +1,10 @@
 import profileReducer, {
   fetchUserProfile,
   updateUserProfile,
+  initialState
 } from './profileSlice';
 import type { ProfileState, UserProfile } from './profileSlice';
 import { describe, it, expect } from 'vitest';
-
-const initialState: ProfileState = {
-  user: null,
-  isLoading: false,
-  error: null,
-};
 
 const mockUser: UserProfile = {
   email: 'user@example.com',

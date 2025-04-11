@@ -14,7 +14,7 @@ export interface ProfileState {
   error: string | null;
 }
 
-const initialState: ProfileState = {
+export const initialState: ProfileState = {
   user: null,
   isLoading: false,
   error: null,

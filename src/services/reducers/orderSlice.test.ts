@@ -1,15 +1,10 @@
 import orderReducer, {
   createOrder,
   resetOrder,
+  initialState
 } from './orderSlice';
 import type { OrderState } from './orderSlice';
 import { describe, it, expect } from 'vitest';
-
-const initialState: OrderState = {
-  orderId: null,
-  status: 'idle',
-  error: null,
-};
 
 describe('orderSlice', () => {
   it('возвращает начальное состояние', () => {

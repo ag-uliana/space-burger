@@ -1,12 +1,6 @@
-import ingredientsReducer, { fetchIngredients } from './ingredientsSlice';
+import ingredientsReducer, { fetchIngredients, initialState } from './ingredientsSlice';
 import type { Ingredient } from '../../types';
-import type { IngredientsState } from './ingredientsSlice';
 import { describe, it, expect } from 'vitest';
-
-const initialState: IngredientsState = {
-  items: [],
-  status: 'idle',
-};
 
 const mockIngredients: Ingredient[] = [
   {

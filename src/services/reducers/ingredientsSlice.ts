@@ -7,7 +7,7 @@ export type IngredientsState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
 };
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   items: [],
   status: 'idle',
 };

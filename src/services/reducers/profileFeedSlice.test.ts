@@ -5,18 +5,10 @@ import profileFeedReducer, {
   wsProfileError,
   wsProfileMessage,
   wsProfileDisconnect,
+  initialState
 } from './profileFeedSlice';
-import type { ProfileFeedState } from './profileFeedSlice';
 import type { FeedOrder } from './feedSlice';
 import { describe, it, expect } from 'vitest';
-
-const initialState: ProfileFeedState = {
-  orders: [],
-  status: 'idle',
-  error: null,
-  total: 0,
-  totalToday: 0,
-};
 
 const sampleOrders: FeedOrder[] = [
   {

@@ -1,6 +1,7 @@
 import currentIngredientReducer, {
     setCurrentIngredient,
     clearCurrentIngredient,
+    initialState
 } from './currentIngredientSlice';
 import { describe, it, expect } from 'vitest';
   
@@ -18,10 +19,6 @@ const mockIngredient = {
   image_large: 'image-large',
   uniqueId: 'mock',
   __v: 1879,
-};
-  
-const initialState = {
-  ingredient: null,
 };
   
 describe('currentIngredientSlice', () => {

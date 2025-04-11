@@ -5,17 +5,10 @@ import feedReducer, {
   wsFeedClose,
   wsFeedError,
   wsFeedMessage,
+  initialState
 } from './feedSlice';
-import type { FeedState, FeedOrder } from './feedSlice';
+import type { FeedOrder } from './feedSlice';
 import { describe, it, expect } from 'vitest';
-  
-const initialState: FeedState = {
-  orders: [],
-  status: 'idle',
-  error: null,
-  total: 0,
-  totalToday: 0,
-};
   
 const sampleOrders: FeedOrder[] = [
   {

@@ -13,7 +13,7 @@ interface OrderResponse {
   order: { number: number };
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   orderId: null,
   status: 'idle',
   error: null,
