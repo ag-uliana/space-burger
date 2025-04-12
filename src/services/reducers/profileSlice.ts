@@ -3,18 +3,18 @@ import { request } from "../api/request";
 import { refreshToken } from "./authSlice";
 import { RootState } from "../store";
 
-interface UserProfile {
+export interface UserProfile {
   email: string;
   name: string;
 }
 
-interface ProfileState {
+export interface ProfileState {
   user: UserProfile | null;
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: ProfileState = {
+export const initialState: ProfileState = {
   user: null,
   isLoading: false,
   error: null,

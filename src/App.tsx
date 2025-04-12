@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "./types/hooks";
 import BurgerPage from "./pages/BurgerPage";
@@ -22,7 +22,6 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state?.background;
-
   const isFeed = location.pathname.startsWith('/feed');
   const isProfile = location.pathname.startsWith('/profile/orders');
 

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { request } from "../api";
-import { authAPI } from "../api/authAPI";
+import { request, authAPI } from "../api";
 
 interface AuthState {
   user: { email: string; name: string } | null;
@@ -20,7 +19,7 @@ export const selectUser = createSelector(
   (auth) => auth.user
 );
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   user: savedUser ? JSON.parse(savedUser) : null,
   accessToken: null,
   refreshToken: savedRefreshToken || null,

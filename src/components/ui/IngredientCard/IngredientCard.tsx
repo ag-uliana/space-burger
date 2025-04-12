@@ -29,6 +29,7 @@ export function IngredientCard({
         ref={dragRef}
         className={`${styles.card} ${isDragging ? styles.dragging : ""}`} 
         onClick={onClick}
+        data-testid={`ingredient-card-${ingredient.type}`}
       >
         {count}
         <img src={image} alt={name} className={styles.image} />

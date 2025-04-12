@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FeedOrder } from './feedSlice';
 
-type ProfileFeedState = {
+export type ProfileFeedState = {
   orders: FeedOrder[];
   status: 'idle' | 'connected' | 'error';
   error: string | null;
@@ -9,7 +9,7 @@ type ProfileFeedState = {
   totalToday: number;
 };
 
-const initialState: ProfileFeedState = {
+export const initialState: ProfileFeedState = {
   orders: [],
   status: 'idle',
   error: null,
