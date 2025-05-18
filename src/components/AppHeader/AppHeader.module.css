@@ -40,4 +40,15 @@
   left: 50%;
   transform: translateX(-50%);
 }
-  
+
+.langButton {
+  display: flex;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--text-inactive-color);
+}
+
+.langButton:hover {
+  color: var(--colors-interface-accent);
+}

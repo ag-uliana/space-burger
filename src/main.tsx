@@ -3,7 +3,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App.tsx'
+import App from './App.tsx';
+import './i18n';
 import store from './services/store.ts';
 import './index.css'
 

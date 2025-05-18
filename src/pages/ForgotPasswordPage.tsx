@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AuthForm } from "../components";
 import { forgotPassword } from "../services/api";
 
@@ -7,6 +8,7 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!sessionStorage.getItem("forgotPasswordVisited")) {
@@ -37,13 +39,13 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthForm
-      title="Восстановление пароля"
-      fields={[{ type: "email", placeholder: "Укажите E-mail", name: "email" }]}
-      buttonText={loading ? "Отправка..." : "Восстановить"}
+      title={t('AuthForm.resetPasswordTitle')}
+      fields={[{ type: "email", placeholder: t('AuthForm.fields.emailPlaceholder'), name: "email" }]}
+      buttonText={loading ? t('AuthForm.buttonTextResetPassword.loadingReset') : t('AuthForm.buttonTextResetPassword.reset')}
       onSubmit={handleForgotPassword}
       errorMessage={error}
-      bottomText1="Вспомнили пароль?"
-      bottomLinkText1="Войти"
+      bottomText1={t('AuthForm.bottomText1AuthResetPassword')}
+      bottomLinkText1={t('AuthForm.bottomLinkText1ResetPassword')}
       bottomLink1="/login"
     />
   );

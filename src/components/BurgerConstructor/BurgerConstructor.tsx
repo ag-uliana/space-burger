@@ -9,6 +9,7 @@ import { useTotalPrice } from "../../hooks";
 import { useDrop } from "react-dnd";
 import { createOrder, addIngredient } from "../../services/reducers";
 import { PlaceholderElement, DraggableFilling } from "../ui";
+import { useTranslation } from 'react-i18next';
 import { Ingredient } from "../../types";
 import styles from "./BurgerConstructor.module.css";
 
@@ -17,6 +18,7 @@ export default function BurgerConstructor() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const totalPrice = useTotalPrice();
+  const { t } = useTranslation();
   const { bun, fillings } = useAppSelector(state => state.burgerConstructor);
   const user = useAppSelector(state => state.auth.user);
 
@@ -59,7 +61,7 @@ export default function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <PlaceholderElement text="Выберите булку" type="top" />
+          <PlaceholderElement text={t('BurgerConstructor.chooseBun')} type="top" />
         )}
       </div>
 
@@ -69,7 +71,7 @@ export default function BurgerConstructor() {
             <DraggableFilling key={item.uniqueId} item={item} index={index} />
           ))
         ) : (
-          <PlaceholderElement text="Выберите начинку" type="filling" />
+          <PlaceholderElement text={t('BurgerConstructor.chooseFilling')} type="filling" />
         )}
       </div>
 
@@ -83,7 +85,7 @@ export default function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <PlaceholderElement text="Выберите булку" type="bottom" />
+          <PlaceholderElement text={t('BurgerConstructor.chooseBun')} type="bottom" />
         )}
       </div>
 
@@ -98,7 +100,7 @@ export default function BurgerConstructor() {
             onClick={handleOrderClick}
             disabled={!bun || fillings.length === 0}
           >
-            Оформить заказ
+            {t('BurgerConstructor.order')}
           </Button>
         </div>
       </div>

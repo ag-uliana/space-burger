@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FeedOrder } from '../../services/reducers';
 import styles from './Feed.module.css';
 
@@ -10,6 +11,7 @@ type Props = {
 export default function FeedStats({ orders, total, totalToday }: Props) {
   const done = orders.filter(o => o.status === 'done');
   const pending = orders.filter(o => o.status === 'pending');
+   const { t } = useTranslation();
 
   const splitToColumns = (arr: FeedOrder[], itemsPerColumn: number) => {
     const cols: FeedOrder[][] = [];
@@ -26,7 +28,7 @@ export default function FeedStats({ orders, total, totalToday }: Props) {
     <div className={`${styles.stats} ml-15`}>
       <div className={`${styles.statusSection} mb-2`}>
         <div className={styles.statusColumn}>
-          <h3 className="text text_type_main-medium">Готовы:</h3>
+          <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.ready')}</h3>
           <div className={styles.columnsWrap}>
             {doneChunks.map((col, i) => (
               <ul key={i} className={styles.statusColumn}>
@@ -41,7 +43,7 @@ export default function FeedStats({ orders, total, totalToday }: Props) {
         </div>
 
         <div className={styles.statusColumn}>
-          <h3 className="text text_type_main-medium">В работе:</h3>
+          <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.inProgress')}</h3>
           <div className={styles.columnsWrap}>
             {pendingChunks.map((col, i) => (
               <ul key={i} className={styles.statusColumn}>
@@ -57,9 +59,9 @@ export default function FeedStats({ orders, total, totalToday }: Props) {
       </div>
 
       <div className="">
-        <p className="text text_type_main-medium">Выполнено за всё время:</p>
+        <p className="text text_type_main-medium">{t('FeedStats.completedTotal.allTime')}</p>
         <p className="text text_type_digits-large">{total}</p>
-        <p className="text text_type_main-medium">Выполнено за сегодня:</p>
+        <p className="text text_type_main-medium">{t('FeedStats.completedTotal.today')}</p>
         <p className="text text_type_digits-large">{totalToday}</p>
       </div>
     </div>

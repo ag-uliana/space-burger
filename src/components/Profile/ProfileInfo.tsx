@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { RootState } from "../../services/store";
 import { updateUserProfile } from "../../services/reducers/profileSlice";
@@ -19,6 +20,7 @@ interface ProfileInputProps {
 
 const useProfileForm = (user: RootState["auth"]["user"]) => { 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const [error, setError] = useState<string | null>(null);
 
   const accessToken = useAppSelector((state: RootState) => state.auth.accessToken);
@@ -86,7 +88,7 @@ const useProfileForm = (user: RootState["auth"]["user"]) => {
         const result = await dispatch(updateUserProfile(updatedData)).unwrap();
         dispatch(updateAuthUser(result));
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Ошибка обновления профиля");
+        setError(err instanceof Error ? err.message : t('ProfileInfo.updateError'));
       }
     }
 
@@ -123,6 +125,7 @@ const ProfileInput = ({ label, type, name, value, disabled, onChange, onIconClic
 );
 
 export function ProfileInfo() {
+  const { t } = useTranslation();
   const { user, isLoading, isFetching } = useProfileData();
   const { 
     formData, 
@@ -136,14 +139,14 @@ export function ProfileInfo() {
   } = useProfileForm(user);
 
   if ((isLoading || isFetching) && !user) {
-    return <p>Загрузка...</p>;
+    return <p>{t('loading.loading')}</p>;
   }
 
   return (
     <div className={styles.profile}>
       <form onSubmit={handleSubmit}>
         <ProfileInput
-          label="Имя"
+          label={t('ProfileInfo.form.name')}
           type="text"
           name="name"
           value={formData.name}
@@ -152,7 +155,7 @@ export function ProfileInfo() {
           onIconClick={() => handleEdit("name")}
         />
         <ProfileInput
-          label="E-mail"
+          label={t('ProfileInfo.form.email')}
           type="email"
           name="email"
           value={formData.email}
@@ -161,7 +164,7 @@ export function ProfileInfo() {
           onIconClick={() => handleEdit("email")}
         />
         <ProfileInput
-          label="Пароль"
+          label={t('ProfileInfo.form.password')}
           type="password"
           name="password"
           value={formData.password}
@@ -175,10 +178,10 @@ export function ProfileInfo() {
         {hasChanges && (
           <div className={styles.buttons}>
             <Button type="primary" size="medium" htmlType="submit">
-              Сохранить
+            {t('formButtons.save')}
             </Button>
             <Button type="secondary" size="medium" htmlType="button" onClick={handleCancel}>
-              Отмена
+            {t('formButtons.cancel')}
             </Button>
           </div>
         )}
