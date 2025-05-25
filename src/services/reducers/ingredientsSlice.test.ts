@@ -1,4 +1,4 @@
-import ingredientsReducer, { fetchIngredients, initialState } from './ingredientsSlice';
+import ingredientsReducer, { fetchIngredients, ingredientsInitialState  as initialState } from './ingredientsSlice';
 import type { Ingredient } from '../../types';
 import { describe, it, expect } from 'vitest';
 

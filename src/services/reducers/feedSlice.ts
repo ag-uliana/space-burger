@@ -17,7 +17,7 @@ export type FeedState = {
   totalToday: number;
 };
 
-export const initialState: FeedState = {
+export const feedInitialState: FeedState = {
   orders: [],
   status: 'idle',
   error: null,
@@ -27,7 +27,7 @@ export const initialState: FeedState = {
 
 const feedSlice = createSlice({
   name: 'feed',
-  initialState,
+  initialState: feedInitialState,
   reducers: {
     wsFeedConnect(state) {
       state.status = 'idle';

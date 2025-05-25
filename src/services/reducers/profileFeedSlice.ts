@@ -9,7 +9,7 @@ export type ProfileFeedState = {
   totalToday: number;
 };
 
-export const initialState: ProfileFeedState = {
+export const profileFeedInitialState: ProfileFeedState = {
   orders: [],
   status: 'idle',
   error: null,
@@ -19,7 +19,7 @@ export const initialState: ProfileFeedState = {
 
 const profileFeedSlice = createSlice({
   name: 'profileFeed',
-  initialState,
+  initialState: profileFeedInitialState,
   reducers: {
     wsProfileConnect(state) {
       state.status = 'idle';

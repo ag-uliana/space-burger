@@ -5,7 +5,7 @@ import profileFeedReducer, {
   wsProfileError,
   wsProfileMessage,
   wsProfileDisconnect,
-  initialState
+  profileFeedInitialState as initialState
 } from './profileFeedSlice';
 import type { FeedOrder } from './feedSlice';
 import { describe, it, expect } from 'vitest';

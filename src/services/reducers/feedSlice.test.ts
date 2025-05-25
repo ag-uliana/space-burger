@@ -5,7 +5,7 @@ import feedReducer, {
   wsFeedClose,
   wsFeedError,
   wsFeedMessage,
-  initialState
+  feedInitialState as initialState
 } from './feedSlice';
 import type { FeedOrder } from './feedSlice';
 import { describe, it, expect } from 'vitest';

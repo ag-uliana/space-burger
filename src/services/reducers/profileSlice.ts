@@ -14,7 +14,7 @@ export interface ProfileState {
   error: string | null;
 }
 
-export const initialState: ProfileState = {
+export const profileInitialState: ProfileState = {
   user: null,
   isLoading: false,
   error: null,
@@ -118,7 +118,7 @@ export const updateUserProfile = createAsyncThunk(
 
 const profileSlice = createSlice({
   name: "profile",
-  initialState,
+  initialState: profileInitialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

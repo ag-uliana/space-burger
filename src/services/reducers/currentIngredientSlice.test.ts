@@ -1,7 +1,7 @@
 import currentIngredientReducer, {
     setCurrentIngredient,
     clearCurrentIngredient,
-    initialState
+    currentIngredientInitialState  as initialState
 } from './currentIngredientSlice';
 import { describe, it, expect } from 'vitest';
   

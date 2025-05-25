@@ -11,7 +11,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <DndProvider backend={HTML5Backend}> 
-      <BrowserRouter>
+      <BrowserRouter basename="/space-burger">
         <App />
       </BrowserRouter>
     </DndProvider>

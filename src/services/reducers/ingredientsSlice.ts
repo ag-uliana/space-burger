@@ -7,7 +7,7 @@ export type IngredientsState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
 };
 
-export const initialState: IngredientsState = {
+export const ingredientsInitialState: IngredientsState = {
   items: [],
   status: 'idle',
 };
@@ -21,7 +21,7 @@ export const fetchIngredients = createAsyncThunk<Ingredient[]>(
 
 const ingredientsSlice = createSlice({
   name: 'ingredients',
-  initialState,
+  initialState: ingredientsInitialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

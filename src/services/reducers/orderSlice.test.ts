@@ -1,7 +1,7 @@
 import orderReducer, {
   createOrder,
   resetOrder,
-  initialState
+  orderInitialState  as initialState
 } from './orderSlice';
 import type { OrderState } from './orderSlice';
 import { describe, it, expect } from 'vitest';

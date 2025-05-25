@@ -13,7 +13,7 @@ interface OrderResponse {
   order: { number: number };
 }
 
-export const initialState: OrderState = {
+export const orderInitialState: OrderState = {
   orderId: null,
   status: 'idle',
   error: null,
@@ -53,7 +53,7 @@ export const createOrder = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: "order",
-  initialState,
+  initialState: orderInitialState,
   reducers: {
     resetOrder(state) {
       state.orderId = null;

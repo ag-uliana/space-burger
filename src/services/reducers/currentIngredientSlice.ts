@@ -5,13 +5,13 @@ type CurrentIngredientState = {
   ingredient: Ingredient | null;
 };
 
-export const initialState: CurrentIngredientState = {
+export const currentIngredientInitialState : CurrentIngredientState = {
   ingredient: null,
 };
 
 const currentIngredientSlice = createSlice({
   name: 'currentIngredient',
-  initialState,
+  initialState: currentIngredientInitialState,
   reducers: {
     setCurrentIngredient(state, action: PayloadAction<Ingredient>) {
       state.ingredient = action.payload;

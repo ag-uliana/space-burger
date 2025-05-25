@@ -1,6 +1,6 @@
 import authReducer, {
     updateAuthUser,
-    initialState
+    authInitialState as initialState
   } from './authSlice';
   
   import {

@@ -19,7 +19,7 @@ export const selectUser = createSelector(
   (auth) => auth.user
 );
 
-export const initialState: AuthState = {
+export const authInitialState: AuthState = {
   user: savedUser ? JSON.parse(savedUser) : null,
   accessToken: null,
   refreshToken: savedRefreshToken || null,
@@ -115,7 +115,7 @@ export const refreshToken = createAsyncThunk(
 
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: authInitialState,
   reducers: {
     updateAuthUser: (state, action) => {
       state.user = action.payload;

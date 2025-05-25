@@ -4,7 +4,6 @@ export * from './ingredientsSlice';
 export * from './orderSlice';
 export * from './authSlice';
 export * from './profileSlice';
-export * from './authSlice';
-export * from './feedSlice';
+export * from './feedSlice';    
 export * from './profileFeedSlice';
 export * from './socketMiddleware';

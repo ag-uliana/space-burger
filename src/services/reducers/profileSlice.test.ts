@@ -1,7 +1,7 @@
 import profileReducer, {
   fetchUserProfile,
   updateUserProfile,
-  initialState
+  profileInitialState as initialState
 } from './profileSlice';
 import type { ProfileState, UserProfile } from './profileSlice';
 import { describe, it, expect } from 'vitest';
