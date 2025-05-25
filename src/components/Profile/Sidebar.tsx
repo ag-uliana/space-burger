@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./ProfilePage.module.css";
 
@@ -19,6 +20,7 @@ const NavItem = ({ to, children }: { to: string; children: string }) => (
 export function Sidebar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     try {
@@ -34,19 +36,19 @@ export function Sidebar() {
   return (
     <nav className={`${styles.sidebar} mr-15`}>
       <ul className={styles.menu}>
-        <NavItem to="/profile">Профиль</NavItem>
-        <NavItem to="/profile/orders">История заказов</NavItem>
+        <NavItem to="/profile">{t('Sidebar.profile')}</NavItem>
+        <NavItem to="/profile/orders">{t('Sidebar.orders')}</NavItem>
         <li>
           <button
             className={`${styles.logout} text text_type_main-default`}
             onClick={handleLogout}
           >
-            Выход
+            {t('Sidebar.logout')}
           </button>
         </li>
       </ul>
       <p className={`${styles.hint} text text_type_main-small mt-20`}>
-        В этом разделе вы можете изменить свои персональные данные
+        {t('Sidebar.about')}
       </p>
     </nav>
   );

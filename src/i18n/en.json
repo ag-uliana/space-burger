@@ -1,0 +1,109 @@
+{
+  "AppHeader": {
+    "navConstructor": "Burger builder",
+    "navFeed": "Order feed",
+    "navAccount": "Account"
+  },
+  "BurgerPage": {
+    "header": "Make your burger"
+  },
+  "BurgerIngredients": {
+    "tabBuns": "Buns",
+    "tabSauces": "Sauces",
+    "tabFillings": "Fillings"
+  },
+  "BurgerConstructor": {
+    "chooseBun": "Choose bun",
+    "chooseFilling": "Choose fillings",
+    "order": "Order"
+  },
+  "FeedPage": {
+    "header": "Order feed"
+  },
+  "FeedStats": {
+    "statusColumn": {
+      "ready": "Ready",
+      "inProgress": "In progress"
+    },
+    "completedTotal": {
+      "today": "Completed today:",
+      "allTime": "Completed for all time:"
+    }
+  },
+  "IngredientDetails": {
+    "calories": "Calories, kcal",
+    "protein": "Protein, g",
+    "fats": "Fat, g",
+    "carbs": "Carb, g"
+  },
+  "OrderDetails": {
+    "loading": "Placing your order...",
+    "details": {
+      "id": "order id",
+      "cooking": "Your order has started to be prepared",
+      "wait": "Wait until the orbital station is ready"
+    }
+  },
+  "Sidebar": {
+    "profile": "Profile",
+    "orders": "Order history",
+    "logout": "Logout",
+    "about": "Here you can change your personal details"
+  },
+  "ProfileInfo": {
+    "updateError": "Profile update error",
+    "form": {
+      "name": "Name",
+      "email": "E-mail",
+      "password": "Password"
+    }
+  },
+  "formButtons": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "loading": {
+    "loading": "Loading...",
+    "error": "Loading error"
+  },
+  "dataTransform": {
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
+  "orederStatusText": {
+    "done": "Done",
+    "pending": "Pending",
+    "created": "Created"
+  },
+  "AuthForm": {
+    "loginTitle": "Login",
+    "authTitle": "Create account",
+    "resetPasswordTitle": "Reset password",
+    "fields": {
+      "namePlaceholder": "Name",
+      "passwordPlaceholder": "Password",
+      "emailPlaceholder": "Your E-mail"
+    },
+    "buttonTextLogin": {
+      "login": "Login",
+      "loadingEnter": "Login..."
+    },
+    "buttonTextAuth": {
+      "auth": "Create account",
+      "loadingAuth": "Creating account..."
+    },
+    "buttonTextResetPassword": {
+      "reset": "Reset",
+      "loadingReset": "In progress..."
+    },
+    "bottomText1Login": "New customers?",
+    "bottomLinkText1Login": "Create account",
+    "bottomText2Login": "Forgot your password?",
+    "bottomLinkText2Login": "Recover password",
+    "bottomText1Auth": "Already registered?",
+    "bottomLinkText1Auth": "Login",
+    "bottomText1AuthResetPassword": "Remembered your password?",
+    "bottomLinkText1ResetPassword": "Login"
+  },
+  "logout": "Logout"
+}

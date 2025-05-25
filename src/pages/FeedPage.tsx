@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import FeedOrderList from '../components/Feed/FeedOrderList';
 import FeedStats from '../components/Feed/FeedStats';
 import { useAppDispatch, useAppSelector } from '../types/hooks';
@@ -11,6 +12,7 @@ export default function FeedPage() {
     const dispatch = useAppDispatch();
     const { orders, status, error, total, totalToday } = useAppSelector(state => state.feed);
     const ingredientsStatus = useAppSelector(state => state.ingredients.status);
+    const { t } = useTranslation();
   
     useEffect(() => {
       if (ingredientsStatus === 'idle') {
@@ -20,9 +22,9 @@ export default function FeedPage() {
   
   return (
     <>
-      <h1 className="text text_type_main-large pt-10 pb-5 pl-10">Лента заказов</h1>
+      <h1 className="text text_type_main-large pt-10 pb-5 pl-10">{t('FeedPage.header')}</h1>
       <div className={styles.columns}>
-        {status === 'idle' && <p>Загрузка...</p>}
+        {status === 'idle' && <p>{t('loading.loading')}</p>}
         {status === 'error' && <p>{error}</p>}
         {status === 'connected' && (
           <>

@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../types/hooks";
 import { NutritionItem } from "./NutritionItem";
 import styles from "./Modal.module.css";
@@ -13,6 +14,7 @@ const useIngredientDetails = () => {
 
 export function IngredientDetails() {
   const ingredient = useIngredientDetails();
+  const { t } = useTranslation();
 
   if (!ingredient) {
     return <p>Загрузка...</p>;
@@ -23,10 +25,10 @@ export function IngredientDetails() {
       <img src={ingredient.image_large} alt={ingredient.name} className={styles.image} />
       <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
       <ul className={`${styles.nutrition} mt-8 mb-0`}>
-        <NutritionItem label="Калории, ккал" value={ingredient.calories} />
-        <NutritionItem label="Белки, г" value={ingredient.proteins} />
-        <NutritionItem label="Жиры, г" value={ingredient.fat} />
-        <NutritionItem label="Углеводы, г" value={ingredient.carbohydrates} />
+        <NutritionItem label={t('IngredientDetails.calories')} value={ingredient.calories} />
+        <NutritionItem label={t('IngredientDetails.protein')} value={ingredient.proteins} />
+        <NutritionItem label={t('IngredientDetails.fats')} value={ingredient.fat} />
+        <NutritionItem label={t('IngredientDetails.carbs')} value={ingredient.carbohydrates} />
       </ul>
     </div>
   );

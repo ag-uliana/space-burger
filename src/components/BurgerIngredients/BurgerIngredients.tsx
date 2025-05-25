@@ -6,6 +6,7 @@ import {
   setCurrentIngredient, 
   addIngredient 
 } from "../../services/reducers";
+import { useTranslation } from "react-i18next";
 import { IngredientCard, IngredientCounter } from "../ui";
 import { useTabs } from "../../hooks";
 import { filterIngredients } from "../../utils";
@@ -17,6 +18,7 @@ export function BurgerIngredients() {
   const navigate = useNavigate();
   const ingredients = useAppSelector(selectIngredients); 
   const { currentTab, handleTabClick, refs, scrollContainerRef } = useTabs();
+  const { t } = useTranslation();
 
   const buns = filterIngredients(ingredients, "bun");
   const sauces = filterIngredients(ingredients, "sauce");
@@ -54,20 +56,20 @@ export function BurgerIngredients() {
     <section className={styles.ingredients}>
       <div className={styles.tabs}>
         <Tab value="buns" active={currentTab === "buns"} onClick={() => handleTabClick("buns")}>
-          Булки
+          {t('BurgerIngredients.tabBuns')}
         </Tab>
         <Tab value="sauces" active={currentTab === "sauces"} onClick={() => handleTabClick("sauces")}>
-          Соусы
+          {t('BurgerIngredients.tabSauces')}
         </Tab>
         <Tab value="fillings" active={currentTab === "fillings"} onClick={() => handleTabClick("fillings")}>
-          Начинки
+          {t('BurgerIngredients.tabFillings')}
         </Tab>
       </div>
 
       <div className={styles.scrollable} ref={scrollContainerRef}>
-        {renderIngredientList(buns, "Булки", refs.buns)}
-        {renderIngredientList(sauces, "Соусы", refs.sauces)}
-        {renderIngredientList(fillings, "Начинки", refs.fillings)}
+        {renderIngredientList(buns, t('BurgerIngredients.tabBuns'), refs.buns)}
+        {renderIngredientList(sauces, t('BurgerIngredients.tabSauces'), refs.sauces)}
+        {renderIngredientList(fillings, t('BurgerIngredients.tabFillings'), refs.fillings)}
       </div>
     </section>
   );

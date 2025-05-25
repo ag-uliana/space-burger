@@ -1,0 +1,109 @@
+{
+  "AppHeader": {
+    "navConstructor": "Конструктор",
+    "navFeed": "Лента заказов",
+    "navAccount": "Личный кабинет"
+  },
+  "BurgerPage": {
+    "header": "Соберите бургер"
+  },
+  "BurgerIngredients": {
+    "tabBuns": "Булки",
+    "tabSauces": "Соусы",
+    "tabFillings": "Начинки"
+  },
+  "BurgerConstructor": {
+    "chooseBun": "Выберите булку",
+    "chooseFilling": "Выберите начинку",
+    "order": "Оформить заказ"
+  },
+  "FeedPage": {
+    "header": "Лента заказов"
+  },
+  "FeedStats": {
+    "statusColumn": {
+      "ready": "Готовы",
+      "inProgress": "В работе"
+    },
+    "completedTotal": {
+      "today": "Выполнено за сегодня:",
+      "allTime": "Выполнено за всё время:"
+    }
+  },
+  "IngredientDetails": {
+    "calories": "Калории, ккал",
+    "protein": "Белки, г",
+    "fats": "Жиры, г",
+    "carbs": "Углеводы, г"
+  },
+  "OrderDetails": {
+    "loading": "Оформляем заказ...",
+    "details": {
+      "id": "идентификатор заказа",
+      "cooking": "Ваш заказ начали готовить",
+      "wait": "Дождитесь готовности на орбитальной станции"
+    }
+  },
+  "Sidebar": {
+    "profile": "Профиль",
+    "orders": "История заказов",
+    "logout": "Выход",
+    "about": "В этом разделе вы можете изменить свои персональные данные"
+  },
+  "ProfileInfo": {
+    "updateError": "Ошибка обновления профиля",
+    "form": {
+      "name": "Имя",
+      "email": "E-mail",
+      "password": "Пароль"
+    }
+  },
+  "formButtons": {
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "loading": {
+    "loading": "Загрузка...",
+    "error": "Ошибка загрузки"
+  },
+  "dataTransform": {
+    "today": "Сегодня",
+    "yesterday": "Вчера"
+  },
+  "orederStatusText": {
+    "done": "Выполнен",
+    "pending": "Готовится",
+    "created": "Создан"
+  },
+  "AuthForm": {
+    "loginTitle": "Вход",
+    "authTitle": "Регистрация",
+    "resetPasswordTitle": "Восстановление пароля",
+    "fields": {
+      "namePlaceholder": "Имя",
+      "passwordPlaceholder": "Пароль",
+      "emailPlaceholder": "Укажите E-mail"
+    },
+    "buttonTextLogin": {
+      "login": "Войти",
+      "loadingEnter": "Вход..."
+    },
+    "buttonTextAuth": {
+      "auth": "Зарегистрироваться",
+      "loadingAuth": "Регистрация..."
+    },
+    "buttonTextResetPassword": {
+      "reset": "Восстановить",
+      "loadingReset": "Отправка..."
+    },
+    "bottomText1Login": "Вы — новый пользователь?",
+    "bottomLinkText1Login": "Зарегистрироваться",
+    "bottomText2Login": "Забыли пароль?",
+    "bottomLinkText2Login": "Восстановить пароль",
+    "bottomText1Auth": "Уже зарегистрированы?",
+    "bottomLinkText1Auth": "Войти",
+    "bottomText1AuthResetPassword": "Вспомнили пароль?",
+    "bottomLinkText1ResetPassword": "Войти"
+  },
+  "logout": "Выйти"
+}
