@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../types/hooks";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { 
   selectIngredients, 
@@ -15,7 +15,7 @@ import styles from "./BurgerIngredients.module.css";
 
 export function BurgerIngredients() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const location = useLocation();
   const ingredients = useAppSelector(selectIngredients); 
   const { currentTab, handleTabClick, refs, scrollContainerRef } = useTabs();
   const { t } = useTranslation();
@@ -23,14 +23,6 @@ export function BurgerIngredients() {
   const buns = filterIngredients(ingredients, "bun");
   const sauces = filterIngredients(ingredients, "sauce");
   const fillings = filterIngredients(ingredients, "main");
-
-  const handleIngredientClick = (ingredient: Ingredient) => {
-    dispatch(setCurrentIngredient(ingredient));
-    dispatch(addIngredient(ingredient));
-    navigate(`/ingredients/${ingredient._id}`, {
-      state: { background: { pathname: location.pathname } }
-    });
-  };
 
   const renderIngredientList = (
     items: Ingredient[],
@@ -41,13 +33,22 @@ export function BurgerIngredients() {
       <h3 ref={ref} className="text text_type_main-medium mt-10 mb-6">{title}</h3>
       <div className={styles.items}>
         {items.map((item) => (
-          <IngredientCard
+          <Link
             key={item._id}
-            ingredient={item}
-            count={<IngredientCounter ingredientId={item._id} />}
-            onClick={() => handleIngredientClick(item)}
-          />
-        ))}
+            to={`/ingredients/${item._id}`}
+            state={{ background: location }}
+            className={styles.ingredientLink}
+            onClick={() => {
+              dispatch(setCurrentIngredient(item));
+              dispatch(addIngredient(item));
+            }}
+          >
+            <IngredientCard
+              ingredient={item}
+              count={<IngredientCounter ingredientId={item._id} />}
+            />
+          </Link>
+      ))}
       </div>
     </>
   );
@@ -55,15 +56,21 @@ export function BurgerIngredients() {
   return (
     <section className={styles.ingredients}>
       <div className={styles.tabs}>
-        <Tab value="buns" active={currentTab === "buns"} onClick={() => handleTabClick("buns")}>
-          {t('BurgerIngredients.tabBuns')}
-        </Tab>
-        <Tab value="sauces" active={currentTab === "sauces"} onClick={() => handleTabClick("sauces")}>
-          {t('BurgerIngredients.tabSauces')}
-        </Tab>
-        <Tab value="fillings" active={currentTab === "fillings"} onClick={() => handleTabClick("fillings")}>
-          {t('BurgerIngredients.tabFillings')}
-        </Tab>
+        <div className={styles.tabWrapper}>
+          <Tab value="buns" active={currentTab === "buns"} onClick={() => handleTabClick("buns")}>
+            {t('BurgerIngredients.tabBuns')}
+          </Tab>
+        </div>
+        <div className={styles.tabWrapper}>
+          <Tab value="sauces" active={currentTab === "sauces"} onClick={() => handleTabClick("sauces")}>
+            {t('BurgerIngredients.tabSauces')}
+          </Tab>
+        </div>
+        <div className={styles.tabWrapper}>
+          <Tab value="fillings" active={currentTab === "fillings"} onClick={() => handleTabClick("fillings")}>
+            {t('BurgerIngredients.tabFillings')}
+          </Tab>
+        </div>
       </div>
 
       <div className={styles.scrollable} ref={scrollContainerRef}>

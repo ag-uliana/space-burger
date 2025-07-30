@@ -14,7 +14,7 @@ export function OrderDetails() {
       ) : (
         <>
           <p className="orderId text text_type_digits-large">{orderId}</p>
-          <p className="text text_type_main-medium mt-8 mb-15">{t('OrderDetails.details.id')}</p>
+          <p className="text text_type_main-medium mt-2 mb-15 orderId">{t('OrderDetails.details.id')}</p>
           <div className={`${styles.icon} mt-15`} />
           <p className="text text_type_main-default mt-15">{t('OrderDetails.details.cooking')}</p>
           <p className="text text_type_main-default text_color_inactive mt-2">

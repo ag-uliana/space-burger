@@ -8,10 +8,12 @@ type Props = {
 
 export default function FeedOrderList({ orders }: Props) {
   return (
-    <ul className={`${styles.list}`}>
-      {orders.map(order => (
-        <OrderCard key={order._id} order={order} />
-      ))}
-    </ul>
+    <section className={styles.orderList}>
+      <ul className={`${styles.list}`}>
+        {orders.map(order => (
+          <OrderCard key={order._id} order={order} />
+        ))}
+      </ul>
+    </section>
   );
 }

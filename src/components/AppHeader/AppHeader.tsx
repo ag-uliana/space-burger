@@ -13,7 +13,7 @@ export default function AppHeader() {
   const { t } = useTranslation();
   return (
     <header className={styles.header}>
-      <nav className={`${styles.nav} pt-4 pb-4`}>
+      <nav className={`${styles.nav} pt-2 pb-2`}>
         <ul className={`${styles.navList}`}>
           <li className={`mr-4 p-5`}>
             <NavLink

@@ -19,7 +19,7 @@ export default function BurgerPage() {
 
   return (
     <>
-      <h1 className="columnsHeader text text_type_main-large pt-10 pb-5 pl-30">{t('BurgerPage.header')}</h1>
+      <h1 className="columnsHeader text text_type_main-large pt-10 pb-5">{t('BurgerPage.header')}</h1>
       <div className={styles.columns}>
         {ingredientsStatus === "loading" && <p>{t('loading.loading')}</p>}
         {ingredientsStatus === "failed" && <p>{t('loading.error')}</p>}

@@ -5,7 +5,7 @@ import FeedStats from '../components/Feed/FeedStats';
 import { useAppDispatch, useAppSelector } from '../types/hooks';
 import { fetchIngredients } from '../services/reducers';
 import { useFeedConnection } from '../hooks';
-import styles from '../components/Feed/Feed.module.css';
+import styles from "../App.module.css";
 
 export default function FeedPage() {
     useFeedConnection(true);
@@ -22,7 +22,7 @@ export default function FeedPage() {
   
   return (
     <>
-      <h1 className="text text_type_main-large pt-10 pb-5 pl-10">{t('FeedPage.header')}</h1>
+      <h1 className="columnsHeader text text_type_main-large pt-10 pb-5">{t('FeedPage.header')}</h1>
       <div className={styles.columns}>
         {status === 'idle' && <p>{t('loading.loading')}</p>}
         {status === 'error' && <p>{error}</p>}

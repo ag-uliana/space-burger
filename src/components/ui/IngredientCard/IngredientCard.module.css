@@ -7,6 +7,8 @@
   cursor: pointer;
   box-sizing: border-box;
   transition: transform 0.2s ease;
+  padding: 3%;
+  color: white;
 }
 
 .card:hover {

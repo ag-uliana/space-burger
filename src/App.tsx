@@ -40,46 +40,46 @@ export default function App() {
         <AppHeader />
         <main className={styles.main}>
           <Routes location={background || location}>
-          <Route path="/" element={<BurgerPage />} />
-          <Route path="/login" element={
-            <ProtectedRouteElement onlyUnAuth>
-              <LoginPage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="/register" element={
-            <ProtectedRouteElement onlyUnAuth>
-              <RegisterPage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="/forgot-password" element={
-            <ProtectedRouteElement onlyUnAuth>
-              <ForgotPasswordPage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="/reset-password" element={
-            <ProtectedRouteElement onlyUnAuth requiresForgotPassword>
-              <ResetPasswordPage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="/profile/*" element={
-            <ProtectedRouteElement>
-              <ProfilePage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="/ingredients/:id" element={<IngredientPage />} />
-          <Route path="/feed" element={<FeedPage />} />
-          <Route path="/feed/:id" element={<OrderDetailsPage />} />
-          <Route path="/profile/orders/:id" element={
-            <ProtectedRouteElement>
-              <OrderDetailsPage />
-            </ProtectedRouteElement>
-          } />
-          <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<BurgerPage />} />
+            <Route path="/login" element={
+              <ProtectedRouteElement onlyUnAuth>
+                <LoginPage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="/register" element={
+              <ProtectedRouteElement onlyUnAuth>
+                <RegisterPage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="/forgot-password" element={
+              <ProtectedRouteElement onlyUnAuth>
+                <ForgotPasswordPage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="/reset-password" element={
+              <ProtectedRouteElement onlyUnAuth requiresForgotPassword>
+                <ResetPasswordPage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="/profile/*" element={
+              <ProtectedRouteElement>
+                <ProfilePage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="/ingredients/:id" element={<IngredientPage />} />
+            <Route path="/feed" element={<FeedPage />} />
+            <Route path="/feed/:id" element={<OrderDetailsPage />} />
+            <Route path="/profile/orders/:id" element={
+              <ProtectedRouteElement>
+                <OrderDetailsPage />
+              </ProtectedRouteElement>
+            } />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
           {background && (
             <>
-              <Routes>
+              <Routes location={location}>
                 <Route path="/ingredients/:id" element={
                   <Modal onClose={() => {
                     navigate(-1);

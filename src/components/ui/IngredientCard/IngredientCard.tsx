@@ -6,13 +6,11 @@ import styles from "./IngredientCard.module.css";
 interface IngredientCardProps {
     ingredient: Ingredient;
     count?: React.ReactNode;
-    onClick: () => void;
   }
 
 export function IngredientCard({ 
   ingredient,
-  count,
-  onClick
+  count
 }: IngredientCardProps) {
   const { image, price, name } = ingredient;
 
@@ -27,8 +25,7 @@ export function IngredientCard({
     return (
       <div 
         ref={dragRef}
-        className={`${styles.card} ${isDragging ? styles.dragging : ""}`} 
-        onClick={onClick}
+        className={`${styles.card} ${isDragging ? styles.dragging : ""}`}
         data-testid={`ingredient-card-${ingredient.type}`}
       >
         {count}

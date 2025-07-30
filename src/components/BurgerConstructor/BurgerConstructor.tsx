@@ -65,7 +65,7 @@ export default function BurgerConstructor() {
         )}
       </div>
 
-      <div className={styles.scrollable}>
+      <div className={`${styles.scrollable}`}>
         {fillings.length > 0 ? (
           fillings.map((item, index) => (
             <DraggableFilling key={item.uniqueId} item={item} index={index} />

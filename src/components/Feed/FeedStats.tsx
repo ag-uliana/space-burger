@@ -25,45 +25,47 @@ export default function FeedStats({ orders, total, totalToday }: Props) {
   const pendingChunks = splitToColumns(pending, 10);
 
   return (
-    <div className={`${styles.stats} ml-15`}>
-      <div className={`${styles.statusSection} mb-2`}>
-        <div className={styles.statusColumn}>
-          <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.ready')}</h3>
-          <div className={styles.columnsWrap}>
-            {doneChunks.map((col, i) => (
-              <ul key={i} className={styles.statusColumn}>
-              {col.map(o => (
-                <li key={o._id} className="text text_type_digits-default text_color_success">
-                {o.number}
-                </li>
+    <section className={styles.oredersInProgress}>
+      <div className={`${styles.stats} ml-15`}>
+        <div className={`${styles.statusSection} mb-2`}>
+          <div className={styles.statusColumn}>
+            <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.ready')}</h3>
+            <div className={styles.columnsWrap}>
+              {doneChunks.map((col, i) => (
+                <ul key={i} className={styles.statusColumn}>
+                {col.map(o => (
+                  <li key={o._id} className="text text_type_digits-default text_color_success">
+                  {o.number}
+                  </li>
+                ))}
+                </ul>
               ))}
-              </ul>
-            ))}
-        </div>
-        </div>
+          </div>
+          </div>
 
-        <div className={styles.statusColumn}>
-          <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.inProgress')}</h3>
-          <div className={styles.columnsWrap}>
-            {pendingChunks.map((col, i) => (
-              <ul key={i} className={styles.statusColumn}>
-              {col.map(o => (
-                <li key={o._id} className="text text_type_digits-default">
-                {o.number}
-                </li>
+          <div className={styles.statusColumn}>
+            <h3 className="text text_type_main-medium">{t('FeedStats.statusColumn.inProgress')}</h3>
+            <div className={styles.columnsWrap}>
+              {pendingChunks.map((col, i) => (
+                <ul key={i} className={styles.statusColumn}>
+                {col.map(o => (
+                  <li key={o._id} className="text text_type_digits-default">
+                  {o.number}
+                  </li>
+                ))}
+                </ul>
               ))}
-              </ul>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="">
-        <p className="text text_type_main-medium">{t('FeedStats.completedTotal.allTime')}</p>
-        <p className="text text_type_digits-large">{total}</p>
-        <p className="text text_type_main-medium">{t('FeedStats.completedTotal.today')}</p>
-        <p className="text text_type_digits-large">{totalToday}</p>
+        <div className="">
+          <p className="text text_type_main-medium">{t('FeedStats.completedTotal.allTime')}</p>
+          <p className="text text_type_digits-large">{total}</p>
+          <p className="text text_type_main-medium">{t('FeedStats.completedTotal.today')}</p>
+          <p className="text text_type_digits-large">{totalToday}</p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
