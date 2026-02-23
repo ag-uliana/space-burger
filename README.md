@@ -1,3 +1,5 @@
+## ⚠️ **Note:** The project is currently in the process of being adapted to work fully locally. Originally, it fetched data from an external API, but now the data is being moved to local JSON files for offline use and portfolio purposes. 
+
 # 🚀 Space Burger 
 A modern React + TypeScript application for building and ordering custom space-themed burgers.
 This project demonstrates advanced frontend development techniques including dynamic UI composition, real-time WebSocket data, and clean architectural patterns using Redux Toolkit.  
